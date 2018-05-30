@@ -1,0 +1,11 @@
+cn:
+  hxh:
+    name: shanks
+
+server:
+  port: 9443
+  ssl:
+    key-store: classpath:tomcat.keystore
+    key-store-password: tomcat
+    keyStoreType: pkcs12
+    keyAlias: tomcat

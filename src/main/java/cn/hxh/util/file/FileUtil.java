@@ -1,4 +1,4 @@
-package cn.hxh.util;
+package cn.hxh.util.file;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,37 @@ public class FileUtil {
         } catch (IOException ioe) {
             log.error("Error of writing out", ioe);
         }
+    }
+
+    public static String readFile(String filePath) {
+        File file = new File(filePath);
+        long length = file.length();
+        byte[] bytes = new byte[(int) length];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            int tmp = fis.read(bytes);
+            if (tmp != length) {
+                throw new Exception();
+            }
+            return new String(bytes);
+        } catch (Exception e) {
+            log.error("Error of reading file", e);
+            return null;
+        }
+    }
+
+    public static byte[] readBytesFromFile(String filePath) {
+        File file = new File(filePath);
+        long length = file.length();
+        byte[] rt = new byte[(int) length];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            int tmp = fis.read(rt);
+            if (tmp != length) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            log.error("Error of reading bytes", e);
+        }
+        return rt;
     }
 
     public static String[] readLines(String filePath) {

@@ -1,6 +1,7 @@
-package cn.hxh.util;
+package cn.hxh.util.file;
 
 import cn.hxh.constant.TestConstants;
+import cn.hxh.util.file.FileUtil;
 import org.junit.Test;
 import org.springframework.util.FileSystemUtils;
 
