@@ -15,12 +15,12 @@ public class FileUtil {
 
     }
 
-    public static void writeOut(String filePath, String str) {
+    public static void writeOut(String filePath, String content) {
         BufferedWriter bw = null;
         try {
             try {
                 bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), "utf-8"));
-                bw.write(str);
+                bw.write(content);
             } finally {
                 if (bw != null) {
                     bw.flush();
@@ -29,6 +29,21 @@ public class FileUtil {
             }
         } catch (IOException ioe) {
             log.error("Error of writing out", ioe);
+        }
+    }
+
+    public static String readFile(InputStream is) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] bytes = new byte[1024];
+        int length;
+        try {
+            while ((length = is.read(bytes)) != -1) {
+                byteArrayOutputStream.write(bytes, 0, length);
+            }
+            return byteArrayOutputStream.toString();
+        } catch (Exception e) {
+            log.error("Error of reading inputStream", e);
+            return "";
         }
     }
 
@@ -44,7 +59,7 @@ public class FileUtil {
             return new String(bytes);
         } catch (Exception e) {
             log.error("Error of reading file", e);
-            return null;
+            return "";
         }
     }
 

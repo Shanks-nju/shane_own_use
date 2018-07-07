@@ -3,19 +3,18 @@ package cn.hxh.object;
 import cn.hxh.util.HH;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Password {
+public class Password implements Comparable<Password> {
     @JsonProperty
-    byte[] where;
+    private byte[] where;
     @JsonProperty
-    byte[] account;
+    private byte[] account;
     @JsonProperty
-    byte[] password;
+    private byte[] password;
     @JsonProperty
-    List<Pair> ext;
+    private List<Pair> ext;
 
     public void setAccount(byte[] account) {
         this.account = account;
@@ -25,24 +24,46 @@ public class Password {
         this.password = password;
     }
 
+    public void addPair(String key, String value) {
+        if (this.ext == null) {
+            this.ext = new ArrayList<>();
+        }
+        this.ext.add(new Pair(key.getBytes(), value.getBytes()));
+    }
+
     public void setWhere(byte[] where) {
         this.where = where;
     }
 
-    public void addExt(byte[] key, byte[] value) {
-        if (ext == null) {
-            ext = new ArrayList<>();
-        }
-        ext.add(new Pair(key, value));
+    public byte[] getWhere() {
+        return where;
     }
 
     public void clean() {
         HH.eraseArray(account);
         HH.eraseArray(password);
         HH.eraseArray(where);
-        for (Pair pair : ext) {
-            pair.clean();
+        if (ext != null) {
+            for (Pair pair : ext) {
+                pair.clean();
+            }
         }
+    }
+
+    @Override
+    public int compareTo(Password other) {
+        int i = 0;
+        while (i <= other.where.length && i <= this.where.length) {
+            if (this.where[i] > other.where[i]) {
+                return 1;
+            } else if (this.where[i] < other.where[i]) {
+                return -1;
+            } else {
+                i++;
+            }
+        }
+        if (i < other.where.length) return 1;
+        else return -1;
     }
 
     static class Pair {

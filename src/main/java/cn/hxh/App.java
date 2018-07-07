@@ -1,5 +1,7 @@
 package cn.hxh;
 
+import cn.hxh.util.HH;
+import cn.hxh.util.file.JarIOUtil;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
@@ -11,11 +13,14 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.io.File;
+
 @SpringBootApplication
 @EnableSwagger2
 public class App {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(App.class, args);
+        init();
     }
 
     @Bean
@@ -42,5 +47,13 @@ public class App {
         connector.setSecure(false);
         connector.setRedirectPort(9443);
         return connector;
+    }
+
+    private static void init() throws Exception {
+        JarIOUtil.copyToShane("encrypted");
+        File backup = new File(HH.getResourceFilePath("backup") + File.separator);
+        if (!backup.exists()) {
+            backup.mkdirs();
+        }
     }
 }

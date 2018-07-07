@@ -9,3 +9,8 @@ server:
     key-store-password: tomcat
     keyStoreType: pkcs12
     keyAlias: tomcat
+
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
