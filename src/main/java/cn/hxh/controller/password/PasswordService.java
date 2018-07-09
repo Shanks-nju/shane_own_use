@@ -22,17 +22,17 @@ public class PasswordService {
     PasswordData passwordData;
 
     @PostMapping(value = "passwords")
-    public String request(@RequestBody @Valid Code code) {
+    public String query(@RequestBody @Valid Code code) {
         return getPasswordsString(code.getPassword());
     }
 
     @PostMapping(value = "password/{id}")
-    public boolean request(@RequestBody @Valid Code code, @PathVariable @NotBlank String id) {
+    public boolean delete(@RequestBody @Valid Code code, @PathVariable @NotBlank String id) {
         return passwordData.delete(id, code.getPassword());
     }
 
     @PostMapping(value = "password/new")
-    public boolean request(@RequestBody @Valid CreateRequest body) {
+    public boolean create(@RequestBody @Valid CreateRequest body) {
         Password password = new Password();
         password.setWhere(body.getWhere().getBytes());
         password.setAccount(body.getAccount().getBytes());
