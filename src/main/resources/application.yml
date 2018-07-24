@@ -1,6 +1,9 @@
-cn:
-  hxh:
-    name: shanks
+owner:
+  name: shane
+
+file:
+  passwords: encrypted
+  diary: diary
 
 server:
   port: 9443
@@ -11,7 +14,7 @@ server:
     keyAlias: tomcat
   tomcat:
     accesslog:
-      buffered: true
+      buffered: false
       enabled: true
       pattern: common
       directory: log
@@ -26,7 +29,7 @@ spring:
   security:
     user:
       name: hxh
-      password: shankshh
+      password: shanehh
 
 logging:
   file:
@@ -36,4 +39,3 @@ logging:
 
 security:
   csrf: false
-

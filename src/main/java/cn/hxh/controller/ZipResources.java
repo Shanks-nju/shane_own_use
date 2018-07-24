@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ZipResources {
     @GetMapping("/hello")
-    public String swagger() {
+    public String zip() {
         return "hello world";
     }
 }

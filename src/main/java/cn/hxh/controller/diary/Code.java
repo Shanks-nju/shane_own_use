@@ -1,4 +1,4 @@
-package cn.hxh.controller.password;
+package cn.hxh.controller.diary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,9 +7,9 @@ import javax.validation.constraints.NotBlank;
 public class Code {
     @JsonProperty(value = "code")
     @NotBlank
-    private String code;
+    private int code = 0;
 
-    public String getCode() {
-        return code;
+    public void setCode(int code) {
+        this.code = code;
     }
 }

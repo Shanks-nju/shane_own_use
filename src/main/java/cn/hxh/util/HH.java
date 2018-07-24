@@ -1,5 +1,7 @@
 package cn.hxh.util;
 
+import cn.hxh.common.Constants;
+
 import java.io.File;
 
 public class HH {
@@ -32,7 +34,7 @@ public class HH {
     }
 
     public static String resourceDir() {
-        String path = homeDir() + File.separator + "shane" + File.separator;
+        String path = homeDir() + File.separator + Constants.USER_NAME + File.separator;
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();

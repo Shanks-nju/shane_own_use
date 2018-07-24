@@ -3,8 +3,6 @@ package cn.hxh.controller.password;
 import cn.hxh.object.Password;
 import cn.hxh.storage.PasswordDataImp;
 import cn.hxh.storage.interfaces.PasswordData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +21,15 @@ public class PasswordService {
 
     @PostMapping(value = "passwords")
     public String query(@RequestBody @Valid Code code) {
-        return getPasswordsString(code.getPassword());
+        return getPasswordsString(code.getCode());
     }
 
     @PostMapping(value = "password/{id}")
     public boolean delete(@RequestBody @Valid Code code, @PathVariable @NotBlank String id) {
-        return passwordData.delete(id, code.getPassword());
+        return passwordData.delete(id, code.getCode());
     }
 
-    @PostMapping(value = "password/new")
+    @PostMapping(value = "password")
     public boolean create(@RequestBody @Valid CreateRequest body) {
         Password password = new Password();
         password.setWhere(body.getWhere().getBytes());

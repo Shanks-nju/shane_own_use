@@ -1,5 +1,6 @@
 package cn.hxh;
 
+import cn.hxh.common.Constants;
 import cn.hxh.util.HH;
 import cn.hxh.util.file.JarIOUtil;
 import org.apache.catalina.Context;
@@ -50,7 +51,7 @@ public class App {
     }
 
     private static void init() throws Exception {
-        JarIOUtil.copyToShane("encrypted");
+        JarIOUtil.copyToShane(Constants.ENCRYPTED);
         File backup = new File(HH.getResourceFilePath("backup") + File.separator);
         if (!backup.exists()) {
             backup.mkdirs();
