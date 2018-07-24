@@ -7,6 +7,7 @@ public class Constants {
     public static final String ENCRYPTED = nameConfig().passwordDir;
     public static final String USER_NAME = nameConfig().userName;
     public static final String DIARY = nameConfig().diary;
+    public static final String TEMPORARY = USER_NAME + "_tmp";
 
 
     private static NameConfig nameConfig() {

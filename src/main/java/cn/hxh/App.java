@@ -52,7 +52,7 @@ public class App {
 
     private static void init() throws Exception {
         JarIOUtil.copyToShane(Constants.ENCRYPTED);
-        File backup = new File(HH.getResourceFilePath("backup") + File.separator);
+        File backup = new File(HH.resourceFilePath("backup") + File.separator);
         if (!backup.exists()) {
             backup.mkdirs();
         }

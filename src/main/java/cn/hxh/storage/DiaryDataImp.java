@@ -48,7 +48,7 @@ public class DiaryDataImp implements DiaryData {
     public boolean delete(Diary.Key date) {
         synchronized (lock) {
             if (!diaryMap.containsKey(date)) return false;
-            String path = HH.getResourceFilePath(Constants.DIARY) + File.separator + date.toString();
+            String path = HH.resourceFilePath(Constants.DIARY) + File.separator + date.toString();
             if (!new File(path).delete()) return false;
             diaryMap.remove(date);
         }
@@ -60,7 +60,7 @@ public class DiaryDataImp implements DiaryData {
         synchronized (lock) {
             if (diaryMap.containsKey(diary.getDate())) return false;
             try {
-                String savePath = HH.getResourceFilePath(Constants.DIARY) + File.separator + diary.getDate().toString();
+                String savePath = HH.resourceFilePath(Constants.DIARY) + File.separator + diary.getDate().toString();
                 mapper.writerWithDefaultPrettyPrinter().writeValue(new File(savePath), diary);
                 diaryMap.put(diary.getDate(), diary);
             } catch (IOException e) {
@@ -76,7 +76,7 @@ public class DiaryDataImp implements DiaryData {
         synchronized (lock) {
             if (!diaryMap.containsKey(diary.getDate())) return false;
             try {
-                String savePath = HH.getResourceFilePath(Constants.DIARY) + File.separator + diary.getDate().toString();
+                String savePath = HH.resourceFilePath(Constants.DIARY) + File.separator + diary.getDate().toString();
                 mapper.writerWithDefaultPrettyPrinter().writeValue(new File(savePath), diary);
                 diaryMap.put(diary.getDate(), diary);
             } catch (IOException e) {
@@ -96,7 +96,7 @@ public class DiaryDataImp implements DiaryData {
     }
 
     private File diaryFile() {
-        String path = HH.getResourceFilePath(Constants.DIARY);
+        String path = HH.resourceFilePath(Constants.DIARY);
         File diaryDir = new File(path);
         if (!diaryDir.exists()) {
             diaryDir.mkdirs();

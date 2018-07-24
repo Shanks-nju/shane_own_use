@@ -35,12 +35,14 @@ public class PasswordDataImp implements PasswordData {
             moveToBackup(Constants.ENCRYPTED);
             String content;
             try {
-                content = Privacy.encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap), code.getBytes());
+                content = Privacy
+                        .encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap),
+                                code.getBytes());
             } catch (Exception e) {
                 log.warn("Fail to encrypt new password");
                 return false;
             }
-            FileUtil.writeOut(HH.getResourceFilePath(Constants.ENCRYPTED), content);
+            FileUtil.writeOut(HH.resourceFilePath(Constants.ENCRYPTED), content);
         }
         return true;
     }
@@ -54,12 +56,14 @@ public class PasswordDataImp implements PasswordData {
             moveToBackup(Constants.ENCRYPTED);
             String content;
             try {
-                content = Privacy.encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap), code.getBytes());
+                content = Privacy
+                        .encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap),
+                                code.getBytes());
             } catch (Exception e) {
                 log.warn("Fail to encrypt new password");
                 return false;
             }
-            FileUtil.writeOut(HH.getResourceFilePath(Constants.ENCRYPTED), content);
+            FileUtil.writeOut(HH.resourceFilePath(Constants.ENCRYPTED), content);
         }
         return true;
     }
@@ -74,19 +78,21 @@ public class PasswordDataImp implements PasswordData {
             moveToBackup(Constants.ENCRYPTED);
             String content;
             try {
-                content = Privacy.encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap), code.getBytes());
+                content = Privacy
+                        .encrypt(new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsBytes(passwordMap),
+                                code.getBytes());
             } catch (Exception e) {
                 log.warn("Fail to encrypt new password");
                 return false;
             }
-            FileUtil.writeOut(HH.getResourceFilePath(Constants.ENCRYPTED), content);
+            FileUtil.writeOut(HH.resourceFilePath(Constants.ENCRYPTED), content);
         }
         return true;
     }
 
     public static Map<String, Password> getPasswords(String code) {
         synchronized (lock) {
-            String content = FileUtil.readFile(HH.getResourceFilePath(Constants.ENCRYPTED));
+            String content = FileUtil.readFile(HH.resourceFilePath(Constants.ENCRYPTED));
             byte[] decrypted;
             try {
                 decrypted = Privacy.decrypt(content, code.getBytes());
@@ -95,7 +101,8 @@ public class PasswordDataImp implements PasswordData {
                 return new HashMap<>();
             }
             ObjectMapper mapper = new ObjectMapper();
-            JavaType type = mapper.getTypeFactory().constructParametricType(HashMap.class, String.class, Password.class);
+            JavaType type = mapper.getTypeFactory()
+                    .constructParametricType(HashMap.class, String.class, Password.class);
             Map<String, Password> passwords;
             try {
                 passwords = mapper.readValue(decrypted, type);
@@ -109,9 +116,10 @@ public class PasswordDataImp implements PasswordData {
 
     private static void moveToBackup(String filePath) {
         synchronized (lock) {
-            File file = new File(HH.getResourceFilePath(filePath));
+            File file = new File(HH.resourceFilePath(filePath));
             String path = file.getParent();
-            String backFileName = file.getName() + new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
+            String backFileName =
+                    file.getName() + new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis());
             String backPath = path + File.separator + "backup" + File.separator + backFileName;
             File backFile = new File(backPath);
             boolean flag = file.renameTo(backFile);

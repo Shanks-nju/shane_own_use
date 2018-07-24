@@ -29,12 +29,21 @@ public class HH {
         return System.getProperty("user.home");
     }
 
-    public static String getResourceFilePath(String filePath) {
+    public static String resourceFilePath(String filePath) {
         return resourceDir() + filePath;
     }
 
     public static String resourceDir() {
         String path = homeDir() + File.separator + Constants.USER_NAME + File.separator;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return path;
+    }
+
+    public static String temporaryDir() {
+        String path = homeDir() + File.separator + Constants.TEMPORARY + File.separator;
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
