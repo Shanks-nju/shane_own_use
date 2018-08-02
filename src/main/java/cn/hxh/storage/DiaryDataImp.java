@@ -2,6 +2,7 @@ package cn.hxh.storage;
 
 import cn.hxh.common.Constants;
 import cn.hxh.object.Diary;
+import cn.hxh.object.Diary.Key;
 import cn.hxh.storage.interfaces.DiaryData;
 import cn.hxh.util.HH;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -92,6 +95,20 @@ public class DiaryDataImp implements DiaryData {
         synchronized (lock) {
             if (!diaryMap.containsKey(date)) return null;
             return diaryMap.get(date);
+        }
+    }
+
+    @Override
+    public List<Integer> query(int year, int month) {
+        synchronized (lock) {
+            List<Integer> keys = new ArrayList<>();
+            for (Map.Entry entry : diaryMap.entrySet()) {
+                Diary.Key key = (Diary.Key) entry.getKey();
+                if (key.getYear() == year && key.getMonth() == month) {
+                    keys.add(key.getDate());
+                }
+            }
+            return keys;
         }
     }
 

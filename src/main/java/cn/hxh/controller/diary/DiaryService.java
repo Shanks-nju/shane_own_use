@@ -5,11 +5,14 @@ import cn.hxh.object.Diary;
 import cn.hxh.storage.interfaces.DiaryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Controller
 public class DiaryService {
@@ -25,24 +28,33 @@ public class DiaryService {
 
     @ResponseBody
     @GetMapping(value = "/diary/{year}/{month}/{date}")
-    public Diary get(@PathVariable("year") @Max(2025) @Min(2018) int year,
-                     @PathVariable("month") @Max(12) @Min(1) int month,
-                     @PathVariable("date") @Max(31) @Min(1) int date) {
+    public ResponseDiary get(@PathVariable("year") int year,
+                             @PathVariable("month") int month,
+                             @PathVariable("date") int date) {
         Diary diary = diaryData.query(new Diary.Key(year, month, date));
         if (diary == null) {
             myLog.record(String.format("Query diary unsuccessfully-> %s-%s-%s", year, month, date));
-            return Diary.error();
+            return new ResponseDiary(-1, null);
         } else {
             myLog.record(String.format("Query diary successfully-> %s-%s-%s", year, month, date));
-            return diary;
+            return new ResponseDiary(0, diary);
         }
     }
 
     @ResponseBody
+    @GetMapping(value = "/diary/{year}/{month}")
+    @Validated
+    public List<Integer> get(@PathVariable("year") int year,
+                               @PathVariable("month") int month) {
+        myLog.record(String.format("Query diary list successfully-> %s-%s", year, month));
+        return diaryData.query(year, month);
+    }
+
+    @ResponseBody
     @DeleteMapping(value = "/diary/{year}/{month}/{date}")
-    public Code delete(@PathVariable("year") @Max(2025) @Min(2018) int year,
-                       @PathVariable("month") @Max(12) @Min(1) int month,
-                       @PathVariable("date") @Max(31) @Min(1) int date) {
+    public Code delete(@PathVariable("year") int year,
+                       @PathVariable("month") int month,
+                       @PathVariable("date") int date) {
         Code re = new Code();
         if (diaryData.delete(new Diary.Key(year, month, date))) {
             re.setCode(0);

@@ -6,7 +6,7 @@ file:
   diary: diary
 
 server:
-  port: 9443
+  port: 443
   ssl:
     key-store: classpath:tomcat.keystore
     key-store-password: tomcat
@@ -24,8 +24,6 @@ spring:
   thymeleaf:
     cache: false
     mode: HTML
-
-spring:
   security:
     user:
       name: hxh

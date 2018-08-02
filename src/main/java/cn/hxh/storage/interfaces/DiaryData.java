@@ -2,6 +2,8 @@ package cn.hxh.storage.interfaces;
 
 import cn.hxh.object.Diary;
 
+import java.util.List;
+
 public interface DiaryData {
 
     boolean delete(Diary.Key date);
@@ -11,4 +13,6 @@ public interface DiaryData {
     boolean update(Diary diary);
 
     Diary query(Diary.Key date);
+
+    List<Integer> query(int year, int month);
 }
