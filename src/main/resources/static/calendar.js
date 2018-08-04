@@ -247,12 +247,12 @@ function date_div(date_in) {
 }
 
 function item_div(item) {
-  return item_base(item) + "></div>";
+  return item_base(item) + '"></div>';
 }
 
 function item_div_end_with_button(item) {
   return (
-    item_base(item) + '>\n<button onclick="delete_item(this)">X</button></div>'
+    item_base(item) + '">\n<button onclick="delete_item(this)">X</button></div>'
   );
 }
 
@@ -284,7 +284,6 @@ function request_diary(button) {
   button.setAttribute("disabled", true)
   var dateObj = make_date()
   var body = make_body(dateObj)
-
   var xhr = createXmlHttpRequest();
   xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
@@ -364,7 +363,7 @@ function item_base(item) {
     item["end"] +
     '><label style="margin: 0 5px 0 30px">' +
     content +
-    '</label><input type="text" size="30" maxlength="50" value=' +
+    '</label><input type="text" size="30" maxlength="50" value="' +
     item["content"]
   );
 }
