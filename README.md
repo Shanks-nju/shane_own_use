@@ -9,13 +9,14 @@ Shane
 ### Usage
 
 #### Passwords page
-    Use swagger
+Use swagger:
 
-![image](readmepics/passwords.jpg)
+<img src="readmepics/passwords.jpg" width="717" height="294" alt="image"/>
 
-    Or raw request page(relative path: /main)
+Or raw request page(relative path: /main):
 
-![image](readmepics/main.jpg)
+<img src="readmepics/main.jpg" width="400" height="387" alt="image"/>
+
 #### Diary page
 ![image](readmepics/diary.jpg)
 
