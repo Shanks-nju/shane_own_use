@@ -12,6 +12,8 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Value("${security.csrf}")
     private boolean csrfEnabled;
 
+    String[] noNeed = new String[]{"/", "/owner", "/anyone/**"};
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         if (!csrfEnabled) {
@@ -19,6 +21,7 @@ public class Security extends WebSecurityConfigurerAdapter {
         }
         http
                 .authorizeRequests()
+                .antMatchers(noNeed).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
