@@ -15,7 +15,7 @@ public class Home {
 
     private String html() {
         String top = "<!DOCTYPE html><html><head><title>home</title><link rel=\"icon\" type=\"image/x-icon\" href=\"/anyone/favicon.ico\"><meta charset=\"UTF-8\"><meta name=\"content-type\" content=\"text/html\"></head>";
-        String h1 = "<h1>Services List</h1><body><ul>";
+        String h1 = "<h1>Services List</h1><body bgcolor=\"#F0FFF0\"><ul>";
         String end = "</ul></body><html>";
         return top + h1 + body() + end;
     }
