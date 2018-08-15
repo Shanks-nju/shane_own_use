@@ -49,6 +49,9 @@ public class FileUtil {
 
     public static String readFile(String filePath) {
         File file = new File(filePath);
+        if (!file.exists()) {
+            return "";
+        }
         long length = file.length();
         byte[] bytes = new byte[(int) length];
         try (FileInputStream fis = new FileInputStream(file)) {

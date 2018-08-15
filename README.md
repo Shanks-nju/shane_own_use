@@ -5,6 +5,7 @@ Shane
 - Manage encrypted passwords.
 - Record works for time management.
 - Back up resources.
+- Write down notes.
 
 ### Usage
 
@@ -18,6 +19,9 @@ Use swagger:
 
 #### Diary Page
 ![image](readmepics/diary.jpg)
+
+#### Note Page
+![image](readmepics/note.jpg)
 
 #### Resources Path
     /resources
